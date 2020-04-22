@@ -1,0 +1,18 @@
+---
+# tasks file for install-package
+  - name: install git
+    apt:
+      name: git
+      state: present
+
+  - name: install jdk
+    apt:
+      name: default-jdk
+      state: present
+      force_apt_get: yes
+
+  - name: install maven
+    apt:
+      name: maven
+      state: present
+      force_apt_get: yes 

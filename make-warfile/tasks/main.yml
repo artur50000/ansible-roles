@@ -1,0 +1,18 @@
+---
+# tasks file for make-warfile
+  - name: cloning by git
+    command: 
+      cmd: git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      chdir: /tmp/
+   
+    
+  - name: replace text
+    lineinfile:
+      path: /tmp/boxfuse-sample-java-war-hello/src/main/webapp/index.jsp
+      regexp: 'Congratulations'
+      line: Congratulations ARTUR!  
+  
+  - name: run maven
+    command:
+      cmd: mvn package
+      chdir: /tmp/boxfuse-sample-java-war-hello

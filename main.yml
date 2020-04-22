@@ -1,0 +1,30 @@
+---
+- name: create war file
+  hosts: db
+  become: yes
+
+  roles:
+   - install-package
+   - make-warfile
+
+  tasks:
+  - name: Store file into ansible dir
+    fetch:
+      src: /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      dest: /home/ubuntu/ansible-roles/
+
+
+- name: install tomcat and run war file
+  hosts: web
+  become: yes
+
+  roles:
+   - tomcat-server
+
+  tasks:
+  - name: Ensure war file is present
+    copy:
+      src: 172.31.39.154/tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      dest: /var/lib/tomcat8/webapps/
+
+

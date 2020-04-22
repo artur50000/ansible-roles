@@ -1,0 +1,19 @@
+---
+# tasks file for tomcat-server
+ - name: Ensure tomcat8 package is present
+   apt:
+     name: tomcat8
+     state: present
+
+
+ - name: Ensure service tomcat is up
+   service: 
+     name: tomcat8
+     state: started
+
+ - name: template war file
+   template:
+     src: hello-1.0.war
+     dest: /var/lib/tomcat8/webapps/hello-1.0.war
+   notify:
+     - restart tomcat8
